@@ -1,3 +1,10 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+
+.form-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(153, 101, 21, 0.45);
+    border-color: #fffc67;
+}
