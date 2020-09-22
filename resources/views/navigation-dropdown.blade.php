@@ -6,7 +6,8 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="/dashboard">
-                        <x-jet-application-mark class="block h-9 w-auto" />
+                        <!--<x-jet-application-mark class="block h-9 w-auto" />-->
+                        <img class="home_logo" src='https://vignette.wikia.nocookie.net/leagueoflegends/images/5/54/Bandle_City_Crest_icon.png'>
                     </a>
                 </div>
 
