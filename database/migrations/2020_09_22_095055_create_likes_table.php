@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
+            $table->foreignId('post_id')->constrained('posts'); //relation with posts table
+            $table->foreignId('author_id')->constrained('users'); //relation with users table
+            $table->integer('value'); //value=1 -> like, value=-1 -> dislike
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('likes');
     }
 }
