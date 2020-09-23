@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-// use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,18 +21,26 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    $post = new stdClass();
-    $post->image = 'https://vignette.wikia.nocookie.net/leagueoflegends/images/9/90/Poppy_OriginalCentered.jpg/revision/latest?cb=20180414203503';
-    $post->content = 'Poppy is the best champion in LOL';
-    $post->author = 'Tristana';
+    $post1 = new stdClass();
+    $post1->image = 'https://vignette.wikia.nocookie.net/leagueoflegends/images/9/90/Poppy_OriginalCentered.jpg/revision/latest?cb=20180414203503';
+    $post1->content = 'Poppy is the best champion in LOL';
+    $post1->author = 'Tristana';
+
+    $post2 = new stdClass();
+    $post2->image = 'https://vignette.wikia.nocookie.net/leagueoflegends/images/6/67/Tristana_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203651';
+    $post2->content = 'La que nace artillera de Bandle, muere artillera de Bandle';
+    $post2->author = 'Tristana';
+
     $posts = [
-        $post
+        $post1,
+        $post2
     ];
     return view('dashboard')->with('posts', $posts);
 })->name('dashboard');
 
 use App\Models\User;
+
 Route::get('/test', function () {
-    $user =User::find(1);
+    $user = User::find(1);
     return $user;
 });
