@@ -31,5 +31,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard')->with('posts', $posts);
 })->name('dashboard');
 
-
-//Here we have to implement the logic for routing when session is active
+use App\Models\User;
+Route::get('/test', function () {
+    $user =User::find(1);
+    return $user;
+});
