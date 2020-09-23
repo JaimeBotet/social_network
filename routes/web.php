@@ -30,3 +30,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     ];
     return view('dashboard')->with('posts', $posts);
 })->name('dashboard');
+
+use App\Models\User;
+Route::get('/test', function () {
+    $user =User::find(1);
+    return $user;
+});
