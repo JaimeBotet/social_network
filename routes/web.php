@@ -22,11 +22,14 @@ Route::get('/', function () {
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     $post = new stdClass();
-    $post->image= 'https://vignette.wikia.nocookie.net/leagueoflegends/images/9/90/Poppy_OriginalCentered.jpg/revision/latest?cb=20180414203503';
-    $post->content= 'Poppy is the best champion in LOL';
+    $post->image = 'https://vignette.wikia.nocookie.net/leagueoflegends/images/9/90/Poppy_OriginalCentered.jpg/revision/latest?cb=20180414203503';
+    $post->content = 'Poppy is the best champion in LOL';
     $post->author = 'Tristana';
-    $posts=[
+    $posts = [
         $post
     ];
     return view('dashboard')->with('posts', $posts);
 })->name('dashboard');
+
+
+//Here we have to implement the logic for routing when session is active
