@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class PostsController extends Controller
 {
@@ -45,7 +46,18 @@ class PostsController extends Controller
      */
     public function show($id)
     {
-        //
+        $posts = Post::all();
+        foreach ($posts as $post) {
+            if ($post->id == $id) echo $post->content;
+        }
+    }
+
+    public function showAll()
+    {
+        $posts = Post::all();
+        foreach ($posts as $post) {
+            echo $post->content . "<br>";
+        }
     }
 
     /**

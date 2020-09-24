@@ -39,8 +39,12 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 })->name('dashboard');
 
 use App\Models\User;
+use Laravel\Jetstream\Rules\Role;
 
 Route::get('/test', function () {
     $user = User::find(1);
     return $user;
 });
+
+Route::get('/posts/{id}', [PostsController::class, 'show']);
+Route::get('/posts', [PostsController::class, 'showAll']);
