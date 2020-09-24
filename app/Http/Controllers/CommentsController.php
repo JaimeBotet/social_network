@@ -35,7 +35,13 @@ class CommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comment = new Comment;
+
+        $comment->post_id = $request->post_id;
+        $comment->author_id = $request->user_id;
+        $comment->content = $request;
+
+        $comment->save();
     }
 
     /**
@@ -46,7 +52,18 @@ class CommentsController extends Controller
      */
     public function show($id)
     {
-        //
+        $comments = Comment::all();
+        foreach ($comments as $comment) {
+            if ($comment->id == $id) echo $comment->content;
+        }
+    }
+
+    public function showAll()
+    {
+        $comments = Comment::all();
+        foreach ($comments as $comment) {
+            echo $comment->content . "<br>";
+        }
     }
 
     /**
@@ -57,7 +74,10 @@ class CommentsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $comments = Comment::all();
+        foreach ($comments as $comment) {
+            if ($comment->id == $id) echo $comment->content;
+        }
     }
 
     /**

@@ -35,7 +35,13 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $post = new Post;
+
+        $post->author_id = $request->user_id;
+        $post->post_img = $request->img;
+        $post->content = $request->content;
+
+        $post->save();
     }
 
     /**
@@ -69,6 +75,10 @@ class PostsController extends Controller
     public function edit($id)
     {
         //
+        $posts = Post::all();
+        foreach ($posts as $post) {
+            if ($post->id == $id) echo $post->content;
+        }
     }
 
     /**
