@@ -11,4 +11,15 @@ class Post extends Model
 
     protected $table = "posts";
     protected $primaryKey = "id";
+
+    protected $fillable = [
+        "author",
+        "post_img",
+        "content"
+    ];
+
+    public function comments()
+    {
+        return $this->hasMany("App\Models\Comment");
+    }
 }

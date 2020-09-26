@@ -25,6 +25,7 @@ class PostsController extends Controller
     public function create()
     {
         //
+        Post::create(["author" => "user", "post_img" => "my_img", "content" => "Lorem ipsum"]);
     }
 
     /**
@@ -36,11 +37,9 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $post = new Post;
-
         $post->author_id = $request->user_id;
         $post->post_img = $request->img;
         $post->content = $request->content;
-
         $post->save();
     }
 
@@ -60,9 +59,26 @@ class PostsController extends Controller
 
     public function showAll()
     {
-        $posts = Post::all();
-        foreach ($posts as $post) {
-            echo $post->content . "<br>";
+        // $posts = Post::all();
+        // $user = $_SESSION['user'];
+        $user = 33;
+        $posts = Post::where('author', $user)->get();
+        // $posts = Post::all();
+
+        // echo "<pre>";
+        // print_r($posts);
+        // echo "</pre>";
+
+        return view('dashboard')->with('posts', $posts);
+    }
+
+    public function showComments($id)
+    {
+        $comments = Post::find($id)->comments;
+        // echo $comments;
+
+        foreach ($comments as $comment) {
+            echo $comment->content . "<br>";
         }
     }
 
@@ -74,11 +90,12 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
-        $posts = Post::all();
-        foreach ($posts as $post) {
-            if ($post->id == $id) echo $post->content;
-        }
+
+        $post = Post::find($id);
+        //Now we show the form with the content of this post
+        //with this echo we are just showing the post raw, no form
+        //TODO
+        echo $post;
     }
 
     /**
@@ -90,7 +107,18 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $post = $request;
+        $post->save();
+    }
+
+    //Wont be used in our application, but might be useful
+    public function bulkUpdate(Request $request, $field, $value)
+    {
+        //Here we are just searching for 1 criteria, where the field=$field takes value=$value
+        Post::where($field, $value)->update([$field => $request->$field]);
+        //For more restrictions, we add more "where" clauses, in this example we will apply the update to our query and only to the element that has id=1
+        // Post::where($field,$value)->where("id", 1)->update([$field => $request->$field]);
     }
 
     /**
@@ -102,5 +130,7 @@ class PostsController extends Controller
     public function destroy($id)
     {
         //
+        $post = Post::find($id);
+        $post->delete();
     }
 }

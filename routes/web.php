@@ -3,6 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
+use App\Models\User;
+use App\Http\Controllers\PostsController;
+use App\Http\Controllers\CommentsController;
+
+use Laravel\Jetstream\Rules\Role;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,37 +20,39 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-// Auth::routes();
-
 Route::get('/', function () {
     return view('auth.login');
 });
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    $post1 = new stdClass();
-    $post1->image = 'https://vignette.wikia.nocookie.net/leagueoflegends/images/9/90/Poppy_OriginalCentered.jpg/revision/latest?cb=20180414203503';
-    $post1->content = 'Poppy is the best champion in LOL';
-    $post1->author = 'Tristana';
+// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+//     $post1 = new stdClass();
+//     $post1->image = 'https://vignette.wikia.nocookie.net/leagueoflegends/images/9/90/Poppy_OriginalCentered.jpg/revision/latest?cb=20180414203503';
+//     $post1->content = 'Poppy is the best champion in LOL';
+//     $post1->author = 'Tristana';
 
-    $post2 = new stdClass();
-    $post2->image = 'https://vignette.wikia.nocookie.net/leagueoflegends/images/6/67/Tristana_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203651';
-    $post2->content = 'La que nace artillera de Bandle, muere artillera de Bandle';
-    $post2->author = 'Tristana';
+// $post2 = new stdClass();
+// $post2->image = 'https://vignette.wikia.nocookie.net/leagueoflegends/images/6/67/Tristana_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203651';
+// $post2->content = 'La que nace artillera de Bandle, muere artillera de Bandle';
+// $post2->author = 'Tristana';
 
-    $posts = [
-        $post1,
-        $post2
-    ];
-    return view('dashboard')->with('posts', $posts);
-})->name('dashboard');
+// $posts = [
+//     $post1,
+//     $post2
+// ];
+//     return view('dashboard')->with('posts', $posts);
+// })->name('dashboard');
 
-use App\Models\User;
-use Laravel\Jetstream\Rules\Role;
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [PostsController::class, 'showAll'])->name('dashboard');
 
+
+//These are all tests to try the controller functions
 Route::get('/test', function () {
     $user = User::find(1);
     return $user;
 });
 
 Route::get('/posts/{id}', [PostsController::class, 'show']);
+Route::get('/posts/{id}/edit', [PostsController::class, 'edit']);
 Route::get('/posts', [PostsController::class, 'showAll']);
+
+Route::get('/posts/{id}/comments', [PostsController::class, 'showComments']);

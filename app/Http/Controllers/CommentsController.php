@@ -25,6 +25,7 @@ class CommentsController extends Controller
     public function create()
     {
         //
+        Comment::create(["post_id" => "post_id", "author_id" => "user", "content" => "Lorem ipsum"]);
     }
 
     /**
@@ -36,11 +37,9 @@ class CommentsController extends Controller
     public function store(Request $request)
     {
         $comment = new Comment;
-
         $comment->post_id = $request->post_id;
         $comment->author_id = $request->user_id;
         $comment->content = $request;
-
         $comment->save();
     }
 
@@ -52,10 +51,8 @@ class CommentsController extends Controller
      */
     public function show($id)
     {
-        $comments = Comment::all();
-        foreach ($comments as $comment) {
-            if ($comment->id == $id) echo $comment->content;
-        }
+        $comment = Comment::find($id);
+        echo $comment->content;
     }
 
     public function showAll()
@@ -74,10 +71,11 @@ class CommentsController extends Controller
      */
     public function edit($id)
     {
-        $comments = Comment::all();
-        foreach ($comments as $comment) {
-            if ($comment->id == $id) echo $comment->content;
-        }
+        $comment = Comment::find($id);
+        //Now we show the form with the content of this post
+        //with this echo we are just showing the post raw, no form
+        //TODO
+        echo $comment;
     }
 
     /**
@@ -89,7 +87,9 @@ class CommentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment = $request;
+        $comment->save();
     }
 
     /**
@@ -100,6 +100,7 @@ class CommentsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
     }
 }

@@ -11,4 +11,10 @@ class Comment extends Model
 
     protected $table = "comments";
     protected $primaryKey = "id";
+
+    protected $fillable = [
+        "post_id",
+        "author_id",
+        "content"
+    ];
 }
