@@ -59,27 +59,21 @@ class PostsController extends Controller
 
     public function showAll()
     {
-        // $posts = Post::all();
         // $user = $_SESSION['user'];
-        $user = 33;
+        $user = 1;
         $posts = Post::where('author', $user)->get();
-        // $posts = Post::all();
-
-        // echo "<pre>";
-        // print_r($posts);
-        // echo "</pre>";
 
         return view('dashboard')->with('posts', $posts);
     }
 
     public function showComments($id)
     {
+        // $user = $_SESSION['user'];
+        $user = 1;
+        $posts = Post::where('author', $user)->get();
         $comments = Post::find($id)->comments;
-        // echo $comments;
 
-        foreach ($comments as $comment) {
-            echo $comment->content . "<br>";
-        }
+        return view('dashboard')->with(['posts' => $posts, 'comments' => $comments]);
     }
 
     /**
