@@ -43,6 +43,7 @@ Route::get('/', function () {
 // })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [PostsController::class, 'showAll'])->name('dashboard');
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/posts/{id}/comments', [PostsController::class, 'showComments'])->name('dashboard');
 
 

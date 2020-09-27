@@ -57,13 +57,40 @@ class PostsController extends Controller
         }
     }
 
+    //This function displays posts and comments
     public function showAll()
     {
         // $user = $_SESSION['user'];
-        $user = 1;
-        $posts = Post::where('author', $user)->get();
+        // $user = 1;
 
-        return view('dashboard')->with('posts', $posts);
+        $posts = Post::all();
+        $comments = array();
+
+        foreach ($posts as $post) {
+            array_push($comments, Post::find($post->id)->comments);
+        }
+
+        // $comments = Post::find()->comments;
+        // echo $comments;
+        echo "<pre>";
+        print_r($comments);
+        // foreach ($comments as $comment) {
+        //     echo $comment->content . "<br>";
+        // }
+        echo "</pre>";
+
+        // $posts = Post::where('author', $user)->get();
+
+
+        //TODO
+        //in each post only show the comments of this post
+        //in blade make something like
+        //$comments = Post::find($post->id)->comments;
+        //in each post... and refactor the above written code in lines 69-71
+
+
+
+        // return view('dashboard')->with(['posts' => $posts, 'comments' => $comments]);
     }
 
     public function showComments($id)
@@ -72,6 +99,8 @@ class PostsController extends Controller
         $user = 1;
         $posts = Post::where('author', $user)->get();
         $comments = Post::find($id)->comments;
+
+
 
         return view('dashboard')->with(['posts' => $posts, 'comments' => $comments]);
     }

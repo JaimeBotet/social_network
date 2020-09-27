@@ -18,6 +18,11 @@ class Post extends Model
         "content"
     ];
 
+    public function comment()
+    {
+        return $this->hasOne("App\Models\Comment");
+    }
+
     public function comments()
     {
         return $this->hasMany("App\Models\Comment");

@@ -17,4 +17,9 @@ class Comment extends Model
         "author_id",
         "content"
     ];
+
+    public function post()
+    {
+        return $this->belongsTo("App\Models\Post");
+    }
 }
