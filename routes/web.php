@@ -42,9 +42,11 @@ Route::get('/', function () {
 //     return view('dashboard')->with('posts', $posts);
 // })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [PostsController::class, 'showAll'])->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [PostsController::class, 'showPosts'])->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/posts/{id}/comments', [PostsController::class, 'showComments'])->name('dashboard');
+
+Route::get('/comments/{id}', [PostsController::class, 'showComments']);
 
 
 //These are all tests to try the controller functions
@@ -56,5 +58,6 @@ Route::get('/test', function () {
 Route::get('/posts/{id}', [PostsController::class, 'show']);
 Route::get('/posts/{id}/edit', [PostsController::class, 'edit']);
 Route::get('/posts', [PostsController::class, 'showAll']);
+
 
 Route::get('/posts/{id}/comments', [PostsController::class, 'showComments']);

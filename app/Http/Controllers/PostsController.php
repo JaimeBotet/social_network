@@ -52,34 +52,35 @@ class PostsController extends Controller
     public function show($id)
     {
         $posts = Post::all();
-        foreach ($posts as $post) {
-            if ($post->id == $id) echo $post->content;
-        }
+        // foreach ($posts as $post) {
+        //     if ($post->id == $id) echo $post->content;
+        // }
+        return view('dashboard')->with('posts', $posts);
     }
 
     //This function displays posts and comments
-    public function showAll()
+    public function showPosts()
     {
         // $user = $_SESSION['user'];
-        // $user = 1;
+        $user = 1;
 
-        $posts = Post::all();
+        // $posts = Post::all();
         $comments = array();
 
-        foreach ($posts as $post) {
-            array_push($comments, Post::find($post->id)->comments);
-        }
+        // foreach ($posts as $post) {
+        //     array_push($comments, Post::find($post->id)->comments);
+        // }
 
-        // $comments = Post::find()->comments;
+        // $comments = Post::find($user)->comments;
         // echo $comments;
-        echo "<pre>";
-        print_r($comments);
+        // echo "<pre>";
+        // print_r($comments);
         // foreach ($comments as $comment) {
         //     echo $comment->content . "<br>";
         // }
-        echo "</pre>";
+        // echo "</pre>";
 
-        // $posts = Post::where('author', $user)->get();
+        $posts = Post::where('author', $user)->get();
 
 
         //TODO
@@ -90,19 +91,29 @@ class PostsController extends Controller
 
 
 
-        // return view('dashboard')->with(['posts' => $posts, 'comments' => $comments]);
+        if (empty($comments)) {
+            return view('dashboard')->with('posts', $posts);
+        } else {
+            return view('dashboard')->with(['posts' => $posts, 'comments' => $comments]);
+        }
     }
 
     public function showComments($id)
     {
-        // $user = $_SESSION['user'];
-        $user = 1;
-        $posts = Post::where('author', $user)->get();
         $comments = Post::find($id)->comments;
+        $comments_array = array();
 
+        foreach ($comments as $comment) {
+            // echo $comment->content . "<br>";
+            array_push($comments_array, $comment);
+        }
 
+        if (empty($comments_array)) {
 
-        return view('dashboard')->with(['posts' => $posts, 'comments' => $comments]);
+            return view('comments');
+        } else {
+            return view('comments')->with('comments', $comments);
+        }
     }
 
     /**

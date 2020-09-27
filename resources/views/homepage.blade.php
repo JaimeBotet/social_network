@@ -16,9 +16,16 @@
             <p class='post_content m-2 mr-5 text-right'>Post author: {{$post->author}}</p>
             @endisset
             <br>
+            <div class="comments_button">
+                <button><a href="/comments/{{$post->id}}">Comments</a></button>
+            </div>
+
+
+
+            <!-- MAYBE THIS SECTION IS NOT NECESSARY -->
             @if(@isset($comments))
             <div class="comments_button">
-                <button><a href="/dashboard">Hide Comments</a></button>
+                <!-- <button><a href="/dashboard">Hide Comments</a></button> -->
             </div>
             <div class="comments">
                 @foreach($comments as $comment)
@@ -29,9 +36,10 @@
             </div>
             @else
             <div class="comments_button">
-                <button><a href="/posts/{{$post->id}}/comments">Show Comments</a></button>
+                <!-- <button><a href="/posts/{{$post->id}}/comments">Show Comments</a></button> -->
             </div>
             @endif
+            <!-- END -->
 
         </div>
     </div>
