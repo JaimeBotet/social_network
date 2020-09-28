@@ -23,7 +23,7 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'author' => 33,
+            'author' => 40,
             'content' => $this->faker->text(),
             'created_at' => now(),
             'updated_at' => now()

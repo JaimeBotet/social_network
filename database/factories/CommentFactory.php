@@ -24,8 +24,8 @@ class CommentFactory extends Factory
     {
         return [
             'content' => $this->faker->paragraph(),
-            'post_id' => 2,
-            'author_id' => 33,
+            'post_id' => 4,
+            'author_id' => 40,
             'created_at' => now(),
             'updated_at' => now()
         ];

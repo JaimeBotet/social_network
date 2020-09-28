@@ -17,7 +17,7 @@ class CreateLikesTable extends Migration
             $table->id();
             $table->foreignId('post_id')->constrained('posts'); //relation with posts table
             $table->foreignId('author_id')->constrained('users'); //relation with users table
-            $table->integer('value'); //value=1 -> like, value=-1 -> dislike
+            $table->boolean('value'); //value=true -> like, value=false -> dislike
             $table->timestamps();
         });
     }

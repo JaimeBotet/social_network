@@ -65,7 +65,7 @@ class PostsController extends Controller
     {
         $user = Auth::user();
 
-        $posts = Post::where('author', $user)->get();
+        $posts = Post::where('author', $user->id)->get();
         foreach ($posts as $post) {
             $post_name = User::where("id", $post->author)->pluck('name');
             $post->author_name = $post_name[0];
