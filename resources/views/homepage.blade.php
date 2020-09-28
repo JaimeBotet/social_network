@@ -16,9 +16,14 @@
             <p class='post_content m-2 mr-5 text-right'>Post author: {{$post->author}}</p>
             @endisset
             <br>
-            <div class="comments_button">
+            <div class="comments_btn">
                 <button><a href="/comments/{{$post->id}}">Comments</a></button>
             </div>
+            @if($post->author==1)
+            <div class="edit_btn">
+                <button><a href="/post/{{$post->id}}/edit">Edit</a></button>
+            </div>
+            @endif
         </div>
     </div>
     @endforeach

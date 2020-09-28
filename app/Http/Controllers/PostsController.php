@@ -113,7 +113,7 @@ class PostsController extends Controller
         //Now we show the form with the content of this post
         //with this echo we are just showing the post raw, no form
         //TODO
-        echo $post;
+        return view('edit')->with('post', $post);
     }
 
     /**

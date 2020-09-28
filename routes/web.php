@@ -34,6 +34,7 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [PostsController::class, 'showPosts'])->name('dashboard');
 
 Route::get('/comments/{id}', [PostsController::class, 'showComments']);
+Route::get('/post/{id}/edit', [PostsController::class, 'edit']);
 Route::get('/getComments/{id}', [PostsController::class, 'getComments']);
 
 
