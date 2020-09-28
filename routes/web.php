@@ -33,7 +33,8 @@ Route::get('/post/{id}/edit', [PostsController::class, 'edit']);
 Route::get('/getComments/{id}', [PostsController::class, 'getComments']);
 
 
-
+//Author dashboard"""
+Route::get('/profile/{authorName}', [PostController::class, 'showProfile']);
 
 
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
+use App\Models\User;
 
 class PostsController extends Controller
 {
@@ -64,8 +65,11 @@ class PostsController extends Controller
     {
         $user = Auth::user();
 
-        $posts = Post::where('author', $user->id)->get();
-
+        $posts = Post::where('author', $user)->get();
+        foreach ($posts as $post) {
+            $post_name = User::where("id", $post->author)->pluck('name');
+            $post->author_name = $post_name[0];
+        }
         return view('dashboard')->with(['posts' => $posts, 'user' => $user]);
     }
 
@@ -112,6 +116,7 @@ class PostsController extends Controller
         //Now we show the form with the content of this post
         //with this echo we are just showing the post raw, no form
         //TODO
+
         return view('edit')->with('post', $post);
     }
 
