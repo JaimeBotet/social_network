@@ -3,22 +3,42 @@
     @foreach($posts as $post)
     <div class="post max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-5">
-            @isset($post->post_img)
-            <img class='post_image ' src='{{$post->post_img}}'>
-            @endisset
-            @isset($post->content)
-            <p class='post_content m-8'>{{$post->content}}</p>
-            @endisset
+            <div class="post_image_container">
+                @isset($post->post_img)
+                <img class='post_image ' src='{{$post->post_img}}'>
+                @endisset
+            </div>
+            <div class="post_author_container my-2 mx-5 flex justify-end">
+                @isset($post->author)
+                <p><strong>Author: </strong><a href="SomeData">{{$post->author}}</a></p>
+                @endisset
+            </div>
+            <div class="post_content_container my-2 mx-5 flex justify-start">
+                @isset($post->content)
+                <p class='post_content m-8'>{{$post->content}}</p>
+                @endisset
+            </div>
+            <div class="post_social_container flex justify-between">
+                <div class="post_comments_button">
+                    <a href="/comments/{{$post->id}}"><div class="bandle_button">Comments</div></a>
+                </div>
+                <div class="post_likes_button flex justify-around">
+                    <div id="post_like_{{$post->id}}" class="post_like">
+                        <img  class="post_social_image" src="assets/img/like.png">
+                    </div>
+                    <div id="post_dislike_{{$post->id}}" class="post_dislike">
+                        <img class="post_social_image" src="assets/img/dislike.png">
+                    </div>
+                </div>
+            </div>
+            <div class="post_comment_container">
+            </div>
             @isset($post->id)
-            <p class='post_content m-2 mr-5 text-right'>Post number: {{$post->id}}</p>
+                <input type="hidden" name="postId" value="{{$post->id}}">
             @endisset
             @isset($post->author)
-            <p class='post_content m-2 mr-5 text-right'>Post author: {{$post->author}}</p>
+                <input type="hidden" name="postAuthor" value="{{$post->author}}">
             @endisset
-            <br>
-            <div class="comments_button">
-                <button><a href="/comments/{{$post->id}}">Comments</a></button>
-            </div>
         </div>
     </div>
     @endforeach
