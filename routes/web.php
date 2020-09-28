@@ -21,32 +21,24 @@ use Laravel\Jetstream\Rules\Role;
 */
 
 Route::get('/', function () {
+    //if user is authenticated go to dashboard, if not go to login.
+    $auth = true;
+    if ($auth) {
+        // return view('/dashboard');
+    } else return view('auth.login');
+
     return view('auth.login');
 });
 
-// Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-//     $post1 = new stdClass();
-//     $post1->image = 'https://vignette.wikia.nocookie.net/leagueoflegends/images/9/90/Poppy_OriginalCentered.jpg/revision/latest?cb=20180414203503';
-//     $post1->content = 'Poppy is the best champion in LOL';
-//     $post1->author = 'Tristana';
-
-// $post2 = new stdClass();
-// $post2->image = 'https://vignette.wikia.nocookie.net/leagueoflegends/images/6/67/Tristana_OriginalCentered.jpg/revision/latest/scale-to-width-down/340?cb=20180414203651';
-// $post2->content = 'La que nace artillera de Bandle, muere artillera de Bandle';
-// $post2->author = 'Tristana';
-
-// $posts = [
-//     $post1,
-//     $post2
-// ];
-//     return view('dashboard')->with('posts', $posts);
-// })->name('dashboard');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [PostsController::class, 'showPosts'])->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/posts/{id}/comments', [PostsController::class, 'showComments'])->name('dashboard');
-
 Route::get('/comments/{id}', [PostsController::class, 'showComments']);
+Route::get('/getComments/{id}', [PostsController::class, 'getComments']);
+
+
+
+
 
 
 //These are all tests to try the controller functions
@@ -54,10 +46,7 @@ Route::get('/test', function () {
     $user = User::find(1);
     return $user;
 });
-
 Route::get('/posts/{id}', [PostsController::class, 'show']);
 Route::get('/posts/{id}/edit', [PostsController::class, 'edit']);
 Route::get('/posts', [PostsController::class, 'showAll']);
-
-
 Route::get('/posts/{id}/comments', [PostsController::class, 'showComments']);

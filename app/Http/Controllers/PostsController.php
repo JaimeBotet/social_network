@@ -61,41 +61,13 @@ class PostsController extends Controller
     //This function displays posts and comments
     public function showPosts()
     {
+        //TODO check how to avoid hardcoding user with a global variable of session
         // $user = $_SESSION['user'];
         $user = 1;
 
-        // $posts = Post::all();
-        $comments = array();
-
-        // foreach ($posts as $post) {
-        //     array_push($comments, Post::find($post->id)->comments);
-        // }
-
-        // $comments = Post::find($user)->comments;
-        // echo $comments;
-        // echo "<pre>";
-        // print_r($comments);
-        // foreach ($comments as $comment) {
-        //     echo $comment->content . "<br>";
-        // }
-        // echo "</pre>";
-
         $posts = Post::where('author', $user)->get();
 
-
-        //TODO
-        //in each post only show the comments of this post
-        //in blade make something like
-        //$comments = Post::find($post->id)->comments;
-        //in each post... and refactor the above written code in lines 69-71
-
-
-
-        if (empty($comments)) {
-            return view('dashboard')->with('posts', $posts);
-        } else {
-            return view('dashboard')->with(['posts' => $posts, 'comments' => $comments]);
-        }
+        return view('dashboard')->with('posts', $posts);
     }
 
     public function showComments($id)
@@ -109,11 +81,23 @@ class PostsController extends Controller
         }
 
         if (empty($comments_array)) {
-
             return view('comments');
         } else {
             return view('comments')->with('comments', $comments);
         }
+    }
+
+    public function getComments($id)
+    {
+        $comments = Post::find($id)->comments;
+        $comments_array = array();
+
+        foreach ($comments as $comment) {
+            // echo $comment->content . "<br>";
+            array_push($comments_array, $comment);
+        }
+
+        echo $comments;
     }
 
     /**
