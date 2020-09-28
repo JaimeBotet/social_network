@@ -23,8 +23,10 @@ class PostFactory extends Factory
     public function definition()
     {
         return [
-            'author' => mt_rand(1,5),
-            'content' => $this->faker->paragraph
+            'author' => 33,
+            'content' => $this->faker->text(),
+            'created_at' => now(),
+            'updated_at' => now()
         ];
     }
 }

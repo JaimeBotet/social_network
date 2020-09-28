@@ -9,6 +9,7 @@ use App\Models\Like;
 use App\Models\Comment;
 use App\Models\Friend;
 
+
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -18,10 +19,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory(5)->create();
-        Post::factory(10)->create();
-        Like::factory(10)->create();
-        Comment::factory(3)->create();
-        Friend::factory(5)->create();
+        // Like::factory(10)->create();
+        // Friend::factory(5)->create();
+
+        // User::factory(2)->create();
+        Post::factory(3)->create();
+        // Comment::factory(2)->create();
     }
 }

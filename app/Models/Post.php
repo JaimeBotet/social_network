@@ -8,4 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
+
+    protected $table = "posts";
+    protected $primaryKey = "id";
+
+    protected $fillable = [
+        "author",
+        "post_img",
+        "content"
+    ];
+
+    public function comment()
+    {
+        return $this->hasOne("App\Models\Comment");
+    }
+
+    public function comments()
+    {
+        return $this->hasMany("App\Models\Comment");
+    }
 }

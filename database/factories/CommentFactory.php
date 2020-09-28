@@ -23,9 +23,11 @@ class CommentFactory extends Factory
     public function definition()
     {
         return [
-            'post_id' => mt_rand(1,10),
-            'author_id' => mt_rand(1,5),
-            'content' => $this->faker->text,
+            'content' => $this->faker->paragraph(),
+            'post_id' => 2,
+            'author_id' => 33,
+            'created_at' => now(),
+            'updated_at' => now()
         ];
     }
 }
