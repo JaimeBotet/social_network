@@ -66,7 +66,7 @@ class PostsController extends Controller
 
         $posts = Post::where('author', $user->id)->get();
 
-        return view('dashboard')->with('posts', $posts);
+        return view('dashboard')->with(['posts' => $posts, 'user' => $user]);
     }
 
     public function showComments($id)

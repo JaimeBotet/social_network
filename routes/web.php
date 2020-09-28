@@ -22,13 +22,10 @@ use Laravel\Jetstream\Rules\Role;
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [PostsController::class, 'showPosts'])->name('dashboard');
 
+
 Route::get('/', function () {
-    if (null !== Auth::user()) {
-    } else return view('auth.login');
-
-    // return view('auth.login');
+    return redirect('/dashboard');
 });
-
 
 
 Route::get('/comments/{id}', [PostsController::class, 'showComments']);
