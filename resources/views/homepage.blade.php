@@ -1,3 +1,8 @@
+<div class='friends_container' id='friendsContainer'>
+    <div><input type='search' placeholder='Search friends'></div>
+    @isset($friends)
+    @endisset
+</div>
 @isset($posts)
 <div class='posts py-12'>
     @foreach($posts as $post)
@@ -53,5 +58,8 @@
         </div>
     </div>
     @endforeach
+</div>
+<div id="friendsButton">
+    <img src='{{asset("assets/img/friends.png")}}'>
 </div>
 @endisset
