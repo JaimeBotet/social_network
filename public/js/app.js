@@ -42092,6 +42092,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var portal_vue__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(portal_vue__WEBPACK_IMPORTED_MODULE_3__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
+__webpack_require__(/*! ./dashboard */ "./resources/js/dashboard.js"); //A.Grandes.R change
+
+
 
 
 
@@ -42144,6 +42147,17 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     forceTLS: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/dashboard.js":
+/*!***********************************!*\
+  !*** ./resources/js/dashboard.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
 
 /***/ }),
 

@@ -1,4 +1,5 @@
 require('./bootstrap');
+require('./dashboard'); //A.Grandes.R change
 
 import Vue from 'vue';
 
