@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Models\User;
 
 class PostsController extends Controller
 {
@@ -66,7 +67,10 @@ class PostsController extends Controller
         $user = 1;
 
         $posts = Post::where('author', $user)->get();
-
+        foreach($posts as $post) {
+            $post_name = User::where("id", $post->author)->pluck('name');
+            $post->author_name = $post_name[0];
+        }
         return view('dashboard')->with('posts', $posts);
     }
 

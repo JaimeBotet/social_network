@@ -22,12 +22,9 @@ use Laravel\Jetstream\Rules\Role;
 
 Route::get('/', function () {
     //if user is authenticated go to dashboard, if not go to login.
-    $auth = true;
-    if ($auth) {
-        // return view('/dashboard');
+    if (Auth::user()) {
+        return redirect()->route('dashboard');
     } else return view('auth.login');
-
-    return view('auth.login');
 });
 
 
@@ -37,7 +34,8 @@ Route::get('/comments/{id}', [PostsController::class, 'showComments']);
 Route::get('/getComments/{id}', [PostsController::class, 'getComments']);
 
 
-
+//Author dashboard"""
+Route::get('/profile/{authorName}', [PostController::class, 'showProfile']);
 
 
 
