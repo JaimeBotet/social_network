@@ -1,6 +1,8 @@
 $(function(){
     //Load the functionalities
+    $('#friendsContainer').fadeOut()
     commentButton()
+    friendsButton()
 })
 
 function commentButton() {
@@ -46,5 +48,19 @@ function commentButton() {
             });
         }
         console.log($(this).attr("data-src"))
+    })
+}
+
+
+
+function friendsButton() {
+    $('#friendsButton').click(function(){
+        if($('#friendsContainer').hasClass('showing')) {
+            console.log('removing friends')
+            $('#friendsContainer').removeClass('showing').fadeOut()
+        } else {
+            console.log('Showing friends')
+            $('#friendsContainer').addClass('showing').fadeIn()
+        }
     })
 }
