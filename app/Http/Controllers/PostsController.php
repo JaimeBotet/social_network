@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Post;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -61,11 +62,9 @@ class PostsController extends Controller
     //This function displays posts and comments
     public function showPosts()
     {
-        //TODO check how to avoid hardcoding user with a global variable of session
-        // $user = $_SESSION['user'];
-        $user = 1;
+        $user = Auth::user();
 
-        $posts = Post::where('author', $user)->get();
+        $posts = Post::where('author', $user->id)->get();
 
         return view('dashboard')->with('posts', $posts);
     }
