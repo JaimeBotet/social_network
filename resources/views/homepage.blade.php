@@ -1,8 +1,10 @@
-@isset($friends)
 <div class='friends_container' id='friendsContainer'>
     <div><input type='search' placeholder='Search friends'></div>
+    @foreach($friends as $friend)
+    <p class="friend_li" data-friend="{{$friend->friend_id}}">{{$friend->name}}</p>
+    @endforeach
 </div>
-@endisset
+
 @isset($posts)
 <div class='posts py-12'>
     @foreach($posts as $post)
@@ -48,7 +50,7 @@
             @endisset
             <br>
             <div class="comments_btn">
-                <button><a href="/comments/{{$post->id}}">Comments</a></button>
+                <!-- <button><a href="/comments/{{$post->id}}">Comments</a></button> -->
             </div>
             @if($post->author==1)
             <div class="edit_btn">
@@ -60,8 +62,7 @@
     @endforeach
 </div>
 @endisset
-@isset($friends)
+
 <div id="friendsButton">
     <img src='{{asset("assets/img/friends.png")}}'>
 </div>
-@endisset
