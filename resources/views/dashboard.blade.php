@@ -21,14 +21,23 @@
     @foreach($posts as $post)
     <div class="post post_id_{{$post->id}}' max-w-7xl mx-auto sm:px-6 lg:px-8" data-post='{{$post->id}}'>
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-5">
+            <div class="post_header_container m-4 flex justify-between">
+            @isset($post->author)
+                <div class="post_author_container flex row items-center">
+                    @if($post->profile_photo_path != null)
+                        <img src='{{ asset("/storage/" . $post->profile_photo_path) }}' class="profile_image mr-2">
+                    @endif
+                    <p><a href="SomeData">{{$post->author_name}}</a></p>
+                </div>
+                <div class="post_likes_container flex row items-center">
+                    <p class="show_likes show_likes_likes" id='show_likes_{{$post->id}}' data-src='{{url("likes/".$post->id) }}'></p>
+                    <p class="show_likes show_likes_dislikes" id='show_dislikes_{{$post->id}}' data-src='{{url("dislikes/".$post->id) }}'></p>
+                </div>
+            @endisset
+            </div>
             <div class="post_image_container">
                 @isset($post->post_img)
                 <img class='post_image ' src='{{$post->post_img}}'>
-                @endisset
-            </div>
-            <div class="post_author_container my-2 mx-5 flex justify-end">
-                @isset($post->author)
-                <p><strong>Author: </strong><a href="SomeData">{{$post->author_name}}</a></p>
                 @endisset
             </div>
             <div class="post_content_container my-2 mx-5 flex justify-start">

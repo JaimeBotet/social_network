@@ -7,8 +7,12 @@ use App\Models\Like;
 
 class LikeController extends Controller
 {
-    public function readLikes($postId) {
-        $response = Like::where('post_id', $postId)->get();
+    public function getLikes($postId) {
+        $response = Like::where(['post_id'=> $postId, 'value'=>'1'])->count();
+        return $response;
+    }
+    public function getDislikes($postId) {
+        $response = Like::where(['post_id'=> $postId, 'value'=>'0'])->count();
         return $response;
     }
 

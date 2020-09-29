@@ -4,6 +4,7 @@ $(function(){
     commentButton()
     friendsButton()
     likesButton()
+    likesQueryLoop()
 })
 
 function commentButton() {
@@ -90,5 +91,24 @@ function likesButton() {
         }).fail(function(error){
             console.log(error)
         });
+        updateLikes()
     });
+}
+
+function likesQueryLoop() {
+    updateLikes()
+    //setInterval(updateLikes, 1000)
+}
+
+function updateLikes() {
+    console.log('Updating likes...')
+    $(".show_likes").each(function(i,val) {
+        let id = $(this).attr('id')
+        const url = $(this).attr('data-src')
+        $.get(url)
+        .done(function(data){
+            $(`#${id}`).text(data)
+            console.log('Receiving data')
+        })
+    })
 }

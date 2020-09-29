@@ -49,5 +49,7 @@ Route::get('/posts/{id}/edit', [PostsController::class, 'edit']);
 Route::get('/posts', [PostsController::class, 'showAll']);
 Route::get('/posts/{id}/comments', [PostsController::class, 'showComments']);
 
+//These are the likes dislikes functions route
 Route::post('/changeLike', [LikeController::class, 'update']);
-Route::get('/likes/{postId}', [LikeController::class, 'readLikes']);
+Route::get('/likes/{postId}', [LikeController::class, 'getLikes']);
+Route::get('/dislikes/{postId}', [LikeController::class, 'getDislikes']);

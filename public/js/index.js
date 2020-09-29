@@ -30253,6 +30253,7 @@ $(function () {
   commentButton();
   friendsButton();
   likesButton();
+  likesQueryLoop();
 });
 
 function commentButton() {
@@ -30334,6 +30335,23 @@ function likesButton() {
       console.log(JSON.parse(data));
     }).fail(function (error) {
       console.log(error);
+    });
+    updateLikes();
+  });
+}
+
+function likesQueryLoop() {
+  updateLikes(); //setInterval(updateLikes, 1000)
+}
+
+function updateLikes() {
+  console.log('Updating likes...');
+  $(".show_likes").each(function (i, val) {
+    var id = $(this).attr('id');
+    var url = $(this).attr('data-src');
+    $.get(url).done(function (data) {
+      $("#".concat(id)).text(data);
+      console.log('Receiving data');
     });
   });
 }

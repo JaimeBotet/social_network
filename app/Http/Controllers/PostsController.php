@@ -83,8 +83,9 @@ class PostsController extends Controller
         //We push in the posts_array the posts created by the logged user
         $posts = Post::where('author', $user->id)->get();
         foreach ($posts as $post) {
-            $post_author = User::where("id", $post->author)->pluck('name');
-            $post->author_name = $post_author[0];
+            $post_author = User::where("id", $post->author)->first();
+            $post->author_name = $post_author->name;
+            $post->profile_photo_path = $post_author->profile_photo_path;
             array_push($posts_array, $post);
         }
 
