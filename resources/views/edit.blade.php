@@ -14,7 +14,7 @@
                     <img class='post_image' src='{{$post->post_img}}'>
                     @endisset
                     <label for="post_img"> New Image: </label>
-                    <input type="text" name="post_img" class="border-solid border-1 border-gray-600">
+                    <input type="text" name="post_img" class="border-solid border-1 border-gray-600" value="{{$post->post_img}}">
                     <br>
 
                     <label for="post_content">Content</label>
