@@ -8,6 +8,7 @@
 
 @section('content')
 
+
 <div class='friends_container' id='friendsContainer'>
     <div><input type='search' placeholder='Search friends'></div>
     @foreach($friends as $friend)
@@ -16,8 +17,21 @@
 </div>
 
 
-@isset($posts)
 <div class='posts py-12'>
+
+    <form class="max-w-full mx-auto my-2 sm:px-6 lg:px-8 flex justify-center" action="/post/store" method="POST">
+        <div class="w-3/4 bg-white overflow-hidden shadow-xl sm:rounded-lg mb-5 flex items-end border-b border-teal-500 py-2 flex flex-col content-center ">
+        @csrf
+            <textarea class=" appearance-none bg-transparent border-none w-full p-5 text-gray-700 leading-tight focus:outline-none" name="content" id="" cols="30" rows="5" placeholder="What are you thinking?"></textarea>
+            <input class="underline appearance-none p-5 border-none w-full text-gray-700  leading-tight focus:outline-none" type="text" name="post_img" placeholder="http://putYourUrlImage.com/nameImage.jpg">
+            <div class="flex -flex-row">
+                <input type="submit" class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded mx-1" value="Publish">
+                <input type="reset" class="flex-shrink-0 bg-teal-500 hover:bg-teal-700 border-teal-500 hover:border-teal-700 text-sm border-4 text-white py-1 px-2 rounded mx-1" value="Cancel">
+            </div>
+        </div>
+    </form>
+
+    @isset($posts)
     @foreach($posts as $post)
     <div class="post post_id_{{$post->id}}' max-w-7xl mx-auto sm:px-6 lg:px-8" data-post='{{$post->id}}'>
         <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-5">
@@ -69,19 +83,28 @@
             <input type="hidden" name="postAuthor" value="{{$post->author}}">
             @endisset
             <br>
-            <div class="comments_btn">
-                <!-- <button><a href="/comments/{{$post->id}}">Comments</a></button> -->
-            </div>
+
+
             @if($post->author==$user->id)
-            <div class="edit_btn">
-                <button><a href="/post/{{$post->id}}/edit">Edit</a></button>
+            <div class="flex justify-center h-16 self-center">
+                <div class="btn edit_btn">
+                    <button class="bg-transparent hover:bg-orange-700 hover:bg-opacity-50 text-orange-700 text-opacity-50 font-semibold hover:text-white py-2 px-4 hover:border-transparent rounded">
+                        <a href="/post/{{$post->id}}/edit">Edit</a>
+                    </button>
+                </div>
+                <div class="btn">
+                    <button class="bg-transparent hover:bg-orange-700 hover:bg-opacity-50 text-orange-700 text-opacity-50 font-semibold hover:text-white py-2 px-4 hover:border-transparent rounded">
+                        <a href="/post/{{$post->id}}/delete">Delete</a>
+                    </button>
+                </div>
             </div>
             @endif
+
         </div>
     </div>
     @endforeach
+    @endisset
 </div>
-@endisset
 
 <div id="friendsButton">
     <img src='{{asset("assets/img/friends.png")}}'>

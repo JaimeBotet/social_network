@@ -29,8 +29,11 @@ Route::get('/', function () {
 });
 
 
-Route::get('/comments/{id}', [PostsController::class, 'showComments']);
+// Route::get('/comments/{id}', [PostsController::class, 'showComments']);
 Route::get('/post/{id}/edit', [PostsController::class, 'edit']);
+Route::post('/post/store', [PostsController::class, 'store']);
+Route::post('/post/{id}/update', [PostsController::class, 'update']);
+Route::get('/post/{id}/delete', [PostsController::class, 'destroy']);
 Route::get('/getComments/{id}', [PostsController::class, 'getComments']);
 
 

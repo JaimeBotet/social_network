@@ -9,17 +9,16 @@
         <div class="post max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg mb-5">
                 <form action="/post/{{$post->id}}/update" method="POST">
-
-                    <label for="post_img">Image</label>
+                    @csrf
                     @isset($post->post_img)
-                    <img class='post_image ' src='{{$post->post_img}}'>
+                    <img class='post_image' src='{{$post->post_img}}'>
                     @endisset
-                    <input type="text" name="post_img">
-                    <button>Browse image</button>
+                    <label for="post_img"> New Image: </label>
+                    <input type="text" name="post_img" class="border-solid border-1 border-gray-600" value="{{$post->post_img}}">
                     <br>
 
                     <label for="post_content">Content</label>
-                    <textarea name="post_content" id="" cols="30" rows="10" class="post_content m-8" style="border: 1px solid black;">{{$post->content}}</textarea>
+                    <textarea name="content" id="" cols="30" rows="10" class="post_content m-8" style="border: 1px solid black;">{{$post->content}}</textarea>
                     <br>
 
                     @isset($post->id)
