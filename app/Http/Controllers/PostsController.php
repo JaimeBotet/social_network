@@ -39,10 +39,13 @@ class PostsController extends Controller
     public function store(Request $request)
     {
         $post = new Post;
-        $post->author_id = $request->user_id;
-        $post->post_img = $request->img;
+        $user = Auth::user();
+        $post->author = $user->id;
+        $post->post_img = $request->post_img;
         $post->content = $request->content;
         $post->save();
+
+        return redirect('/dashboard');
     }
 
     /**
@@ -90,22 +93,6 @@ class PostsController extends Controller
         return view('dashboard')->with(['posts' => $posts_array, 'user' => $user, 'friends' => $friends]);
     }
 
-    public function showComments($id)
-    {
-        $comments = Post::find($id)->comments;
-        $comments_array = array();
-
-        foreach ($comments as $comment) {
-            // echo $comment->content . "<br>";
-            array_push($comments_array, $comment);
-        }
-
-        if (empty($comments_array)) {
-            return view('comments');
-        } else {
-            return view('comments')->with('comments', $comments);
-        }
-    }
 
     public function getComments($id)
     {
@@ -146,8 +133,10 @@ class PostsController extends Controller
     public function update(Request $request, $id)
     {
         $post = Post::find($id);
-        $post = $request;
+        $post->post_img = $request->post_img;
+        $post->content = $request->content;
         $post->save();
+        return redirect('/dashboard');
     }
 
     //Wont be used in our application, but might be useful
