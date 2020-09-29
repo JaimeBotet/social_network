@@ -15,7 +15,7 @@
 
             <!-- We show the profile photo  -->
             <div class="post_image_container">
-                <img class='profile_image ' src='{{$profile->profile_photo_path}}' alt="{{$profile->name}}\'s Profile Picture">
+                <img class='profile_image ' src="{{asset("storage/" . $profile->profile_photo_path)}}" alt="{{$profile->name}}'s Profile Picture">
 
             </div>
 
