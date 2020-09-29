@@ -60,14 +60,23 @@
             <input type="hidden" name="postAuthor" value="{{$post->author}}">
             @endisset
             <br>
-            <div class="comments_btn">
-                <!-- <button><a href="/comments/{{$post->id}}">Comments</a></button> -->
-            </div>
+
+
             @if($post->author==$user->id)
-            <div class="edit_btn">
-                <button><a href="/post/{{$post->id}}/edit">Edit</a></button>
+            <div class="flex justify-center h-16 self-center">
+                <div class="btn edit_btn">
+                    <button class="bg-transparent hover:bg-orange-700 hover:bg-opacity-50 text-orange-700 text-opacity-50 font-semibold hover:text-white py-2 px-4 hover:border-transparent rounded">
+                        <a href="/post/{{$post->id}}/edit">Edit</a>
+                    </button>
+                </div>
+                <div class="btn">
+                    <button class="bg-transparent hover:bg-orange-700 hover:bg-opacity-50 text-orange-700 text-opacity-50 font-semibold hover:text-white py-2 px-4 hover:border-transparent rounded">
+                        <a href="/post/{{$post->id}}/destroy">Delete</a>
+                    </button>
+                </div>
             </div>
             @endif
+
         </div>
     </div>
     @endforeach

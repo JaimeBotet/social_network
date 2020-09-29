@@ -87,11 +87,6 @@ class PostsController extends Controller
             $post->author_name = $post_author[0];
             array_push($posts_array, $post);
         }
-
-        // echo "<pre>";
-        // print_r($posts_array);
-        // echo "</pre>";
-
         return view('dashboard')->with(['posts' => $posts_array, 'user' => $user, 'friends' => $friends]);
     }
 
@@ -172,8 +167,9 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
         $post = Post::find($id);
         $post->delete();
+
+        return redirect('/dashboard');
     }
 }

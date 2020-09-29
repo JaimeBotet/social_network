@@ -31,6 +31,7 @@ Route::get('/', function () {
 
 Route::get('/comments/{id}', [PostsController::class, 'showComments']);
 Route::get('/post/{id}/edit', [PostsController::class, 'edit']);
+Route::get('/post/{id}/delete', [PostsController::class, 'destroy']);
 Route::get('/getComments/{id}', [PostsController::class, 'getComments']);
 
 
