@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\User;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostsController extends Controller
 {
@@ -62,16 +63,36 @@ class PostsController extends Controller
     //This function displays posts and comments
     public function showPosts()
     {
-        //TODO check how to avoid hardcoding user with a global variable of session
-        // $user = $_SESSION['user'];
-        $user = 1;
+        $user = Auth::user();
+        $posts_array = array();
 
-        $posts = Post::where('author', $user)->get();
-        foreach($posts as $post) {
-            $post_name = User::where("id", $post->author)->pluck('name');
-            $post->author_name = $post_name[0];
+        //We push in the posts_array the posts of our friends
+        $friends = User::find($user->id)->friends;
+        foreach ($friends as $friend) {
+            $friend_name = User::where("id", $friend->friend_id)->pluck('name');
+            $friend->name = $friend_name[0];
+
+            $friend_posts = Post::where('author', $friend->friend_id)->get();
+            foreach ($friend_posts as $post) {
+                $post_author = User::where("id", $post->author)->pluck('name');
+                $post->author_name = $post_author[0];
+                array_push($posts_array, $post);
+            }
         }
-        return view('dashboard')->with('posts', $posts);
+
+        //We push in the posts_array the posts created by the logged user
+        $posts = Post::where('author', $user->id)->get();
+        foreach ($posts as $post) {
+            $post_author = User::where("id", $post->author)->pluck('name');
+            $post->author_name = $post_author[0];
+            array_push($posts_array, $post);
+        }
+
+        // echo "<pre>";
+        // print_r($posts_array);
+        // echo "</pre>";
+
+        return view('dashboard')->with(['posts' => $posts_array, 'user' => $user, 'friends' => $friends]);
     }
 
     public function showComments($id)
@@ -97,7 +118,6 @@ class PostsController extends Controller
         $comments_array = array();
 
         foreach ($comments as $comment) {
-            // echo $comment->content . "<br>";
             array_push($comments_array, $comment);
         }
 
@@ -117,7 +137,8 @@ class PostsController extends Controller
         //Now we show the form with the content of this post
         //with this echo we are just showing the post raw, no form
         //TODO
-        echo $post;
+
+        return view('edit')->with('post', $post);
     }
 
     /**

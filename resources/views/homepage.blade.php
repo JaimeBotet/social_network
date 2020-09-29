@@ -1,8 +1,10 @@
-@isset($friends)
 <div class='friends_container' id='friendsContainer'>
     <div><input type='search' placeholder='Search friends'></div>
+    @foreach($friends as $friend)
+    <p class="friend_li" data-friend="{{$friend->friend_id}}">{{$friend->name}}</p>
+    @endforeach
 </div>
-@endisset
+
 @isset($posts)
 <div class='posts py-12'>
     @foreach($posts as $post)
@@ -31,7 +33,7 @@
                 </div>
                 <div class="post_likes_button flex justify-around">
                     <div id="post_like_{{$post->id}}" class="post_like">
-                        <img  class="post_social_image" src="assets/img/like.png">
+                        <img class="post_social_image" src="assets/img/like.png">
                     </div>
                     <div id="post_dislike_{{$post->id}}" class="post_dislike">
                         <img class="post_social_image" src="assets/img/dislike.png">
@@ -41,18 +43,26 @@
             <div class="post_comment_container" id='comment_container_id_{{$post->id}}'>
             </div>
             @isset($post->id)
-                <input type="hidden" name="postId" value="{{$post->id}}">
+            <input type="hidden" name="postId" value="{{$post->id}}">
             @endisset
             @isset($post->author)
-                <input type="hidden" name="postAuthor" value="{{$post->author}}">
+            <input type="hidden" name="postAuthor" value="{{$post->author}}">
             @endisset
+            <br>
+            <div class="comments_btn">
+                <!-- <button><a href="/comments/{{$post->id}}">Comments</a></button> -->
+            </div>
+            @if($post->author==1)
+            <div class="edit_btn">
+                <button><a href="/post/{{$post->id}}/edit">Edit</a></button>
+            </div>
+            @endif
         </div>
     </div>
     @endforeach
 </div>
 @endisset
-@isset($friends)
+
 <div id="friendsButton">
     <img src='{{asset("assets/img/friends.png")}}'>
 </div>
-@endisset

@@ -27,7 +27,8 @@ class Post extends Model
     {
         return $this->hasMany("App\Models\Comment");
     }
-    public function user()
+
+    public function author()
     {
         return $this->belongsTo("App\Models\User");
     }
