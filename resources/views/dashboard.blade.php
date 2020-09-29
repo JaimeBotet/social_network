@@ -11,7 +11,7 @@
 <div class='friends_container' id='friendsContainer'>
     <div><input type='search' placeholder='Search friends'></div>
     @foreach($friends as $friend)
-    <p class="friend_li" data-friend="{{$friend->friend_id}}">{{$friend->name}}</p>
+    <p class="friend_li" data-friend="{{$friend->friend_id}}"><a href="/profile/{{$friend->friend_id}}">{{$friend->name}}</a></p>
     @endforeach
 </div>
 
@@ -62,7 +62,7 @@
             <div class="comments_btn">
                 <!-- <button><a href="/comments/{{$post->id}}">Comments</a></button> -->
             </div>
-            @if($post->author==1)
+            @if($post->author==$user->id)
             <div class="edit_btn">
                 <button><a href="/post/{{$post->id}}/edit">Edit</a></button>
             </div>

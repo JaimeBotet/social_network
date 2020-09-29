@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
 use App\Http\Controllers\PostsController;
-use App\Http\Controllers\CommentsController;
+use App\Http\Controllers\ProfileController;
 
 use Laravel\Jetstream\Rules\Role;
 
@@ -34,7 +34,7 @@ Route::get('/getComments/{id}', [PostsController::class, 'getComments']);
 
 
 //Author dashboard"""
-Route::get('/profile/{authorName}', [PostController::class, 'showProfile']);
+Route::get('/profile/{authorId}', [ProfileController::class, 'show']);
 
 
 
