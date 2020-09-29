@@ -32,11 +32,11 @@
                     <!-- </a> -->
                 </div>
                 <div class="post_likes_button flex justify-around">
-                    <div id="post_like_{{$post->id}}" class="post_like">
-                        <img class="post_social_image" src="assets/img/like.png">
+                    <div id="post_like_{{$post->id}}" class="post_like likesButton" data-postID='{{ $post->id }}' data-userID='{{ $user->id }}' data-value='1' data-src='{{url("/changeLike")}}'>
+                        <img class="post_social_image" src="assets/img/like.png" data-postID='{{ $post->id }}' data-userID='{{ $user->id }}' data-value='1' data-src='{{url("/changeLike")}}'>
                     </div>
-                    <div id="post_dislike_{{$post->id}}" class="post_dislike">
-                        <img class="post_social_image" src="assets/img/dislike.png">
+                    <div id="post_dislike_{{$post->id}}" class="post_dislike likesButton" data-postID='{{ $post->id }}' data-userID='{{ $user->id }}' data-value='0' data-src='{{url("/changeLike")}}'>
+                        <img class="post_social_image" src="assets/img/dislike.png" data-postID='{{ $post->id }}' data-userID='{{ $user->id }}' data-value='0' data-src='{{url("/changeLike")}}'>
                     </div>
                 </div>
             </div>

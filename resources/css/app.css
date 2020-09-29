@@ -70,7 +70,6 @@
 main {
     display: flex;
     flex-direction: row;
-    width: 100vw;
 }
 main .posts {
     flex: 1;

@@ -3,6 +3,7 @@ $(function(){
     $('#friendsContainer').fadeOut()
     commentButton()
     friendsButton()
+    likesButton()
 })
 
 function commentButton() {
@@ -63,4 +64,31 @@ function friendsButton() {
             $('#friendsContainer').addClass('showing').fadeIn()
         }
     })
+}
+
+function likesButton() {
+    $('.likesButton').click(function(event){
+        //const state = $(this).attr("data-state");
+        const dataURL = $(this).attr("data-src");
+        const userID = $(this).attr("data-userID");
+        const postID = $(this).attr("data-postID");
+        const likeValue = $(this).attr("data-value");
+        console.log("UserID: " + userID + "\n" + "PostID: " + postID + "\n" + "LikeValue: " + likeValue)
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            data: {
+                post_id: postID,
+                author_id: userID,
+                value: likeValue
+            },
+            url: dataURL,
+            method: 'POST'
+        }).done(function(data) {
+            console.log(JSON.parse(data))
+        }).fail(function(error){
+            console.log(error)
+        });
+    });
 }

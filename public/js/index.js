@@ -30252,6 +30252,7 @@ $(function () {
   $('#friendsContainer').fadeOut();
   commentButton();
   friendsButton();
+  likesButton();
 });
 
 function commentButton() {
@@ -30307,6 +30308,33 @@ function friendsButton() {
       console.log('Showing friends');
       $('#friendsContainer').addClass('showing').fadeIn();
     }
+  });
+}
+
+function likesButton() {
+  $('.likesButton').click(function (event) {
+    //const state = $(this).attr("data-state");
+    var dataURL = $(this).attr("data-src");
+    var userID = $(this).attr("data-userID");
+    var postID = $(this).attr("data-postID");
+    var likeValue = $(this).attr("data-value");
+    console.log("UserID: " + userID + "\n" + "PostID: " + postID + "\n" + "LikeValue: " + likeValue);
+    $.ajax({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      data: {
+        post_id: postID,
+        author_id: userID,
+        value: likeValue
+      },
+      url: dataURL,
+      method: 'POST'
+    }).done(function (data) {
+      console.log(JSON.parse(data));
+    }).fail(function (error) {
+      console.log(error);
+    });
   });
 }
 

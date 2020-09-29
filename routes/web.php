@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 use App\Models\User;
+use App\Http\Controllers\LikeController;
 use App\Http\Controllers\PostsController;
 use App\Http\Controllers\CommentsController;
 
@@ -34,7 +35,7 @@ Route::get('/getComments/{id}', [PostsController::class, 'getComments']);
 
 
 //Author dashboard"""
-Route::get('/profile/{authorName}', [PostController::class, 'showProfile']);
+Route::get('/profile/{authorName}', [PostsController::class, 'showProfile']);
 
 
 
@@ -47,3 +48,6 @@ Route::get('/posts/{id}', [PostsController::class, 'show']);
 Route::get('/posts/{id}/edit', [PostsController::class, 'edit']);
 Route::get('/posts', [PostsController::class, 'showAll']);
 Route::get('/posts/{id}/comments', [PostsController::class, 'showComments']);
+
+Route::post('/changeLike', [LikeController::class, 'update']);
+Route::get('/likes/{postId}', [LikeController::class, 'readLikes']);
